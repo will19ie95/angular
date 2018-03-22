@@ -3,12 +3,17 @@ import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
 
 import { HomeComponent } from "./home/home.component";
-import { LoginComponent } from "./login/login.component";
+import { LoginFormComponent } from "./login-form/login-form.component";
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { AdditemFormComponent } from './additem-form/additem-form.component';
+import { GetitemFormComponent } from './getitem-form/getitem-form.component';
+import { SearchFormComponent } from './search-form/search-form.component';
+
 
 const appRoutes: Routes = [
   {
     path: "",
-    redirectTo: "home",
+    redirectTo: "login",
     pathMatch: "full"
   },
   {
@@ -17,7 +22,23 @@ const appRoutes: Routes = [
   },
   {
     path: "login",
-    component: LoginComponent
+    component: LoginFormComponent
+  },
+  {
+    path: "signup",
+    component: SignupFormComponent
+  },
+  {
+    path: "additem",
+    component: AdditemFormComponent
+  },
+  {
+    path: "getitem",
+    component: GetitemFormComponent
+  },
+  {
+    path: "search",
+    component: SearchFormComponent
   }
 ];
 

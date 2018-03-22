@@ -1,0 +1,16 @@
+<!-- signup form -->
+<form #signupForm="ngForm" (ngSubmit)="onSignUp(signupForm)" class="form-container">
+  <h2>Sign Up</h2>
+  <hr>
+  <mat-form-field>
+    <input matInput placeholder="email" type="email" [(ngModel)]="user.email" name="email" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="username" type="text" [(ngModel)]="user.username" name="username" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="password" type="password" [(ngModel)]="user.password" name="password" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
+</form>

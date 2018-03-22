@@ -8,19 +8,21 @@ import { User } from '../user';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {}
+  user: User;
+  constructor() {
+    this.user = {
+      username: "Yong Lei",
+      email: "will19ie95@gmail.com"
+    };
+  }
 
   ngOnInit() {}
 
-  logIn(): void {
-    // this.user = {
-    //   username: "Yong Lei",
-    //   email: "will19ie95@gmail.com"
-    // };
-    // console.log("Logged In.", this.user);
+  logOut(): void {
+    this.user = {
+      username: "null",
+      email: "null"
+    };
+    console.log("Logged Out.", this.user);
   }
-
-  signUp(): void {
-  }
-
 }
