@@ -1,0 +1,8 @@
+.navbar-fixed {
+    /* position: fixed; */
+    z-index: 2;
+}
+
+.sidenav-container {
+  flex: 1;
+}

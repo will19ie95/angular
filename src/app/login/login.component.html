@@ -1,0 +1,41 @@
+<h3>Welcome: {{user.username}}</h3>
+<button mat-raised-button color="accent" routerLink="/home">Log Out</button>
+<div class="forms-container">
+  <div class="forms-container">
+    <!-- Form 3 -->
+    <div class="form-container">
+      <h2>Add Item</h2>
+      <hr>
+      <mat-form-field>
+        <input matInput placeholder="content">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="child type">
+      </mat-form-field>
+      <button mat-raised-button color="primary">Add Item</button>
+    </div>
+
+    <!-- Form 4 -->
+    <div class="form-container">
+      <h2>Get Item</h2>
+      <hr>
+      <mat-form-field>
+        <input matInput placeholder="item ID">
+      </mat-form-field>
+      <button mat-raised-button color="primary">Get Item</button>
+    </div>
+
+    <!-- Form 5 -->
+    <div class="form-container">
+      <h2>Search</h2>
+      <hr>
+      <mat-form-field>
+        <input matInput placeholder="time Stamp">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="limit">
+      </mat-form-field>
+      <button mat-raised-button color="primary">Search</button>
+    </div>
+  </div>
+</div>
