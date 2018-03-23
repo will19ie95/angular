@@ -1,12 +1,13 @@
 <!-- additem form -->
-<form class="form-container">
+<form #additemForm="ngForm" (ngSubmit)="onAddItem(additemForm)" class="form-container">
   <h2>Add Item</h2>
   <hr>
   <mat-form-field>
-    <input matInput placeholder="content">
+    <input matInput placeholder="content" type="text" [(ngModel)]="item.content" name="content" required>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="child type">
+    <input matInput placeholder="child type" type="text" [(ngModel)]="item.type" name="type" required>
+    
   </mat-form-field>
-  <button mat-raised-button color="primary">Add Item</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!additemForm.valid">Add Item</button>
 </form>

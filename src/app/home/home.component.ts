@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { User } from '../user';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { User } from '../user';
 export class HomeComponent implements OnInit {
 
   user: User;
-  constructor() {
+  constructor(private http: Http) {
     this.user = {
       username: "Yong Lei",
       email: "will19ie95@gmail.com"
@@ -18,11 +19,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {}
 
-  logOut(): void {
-    this.user = {
-      username: "null",
-      email: "null"
-    };
-    console.log("Logged Out.", this.user);
+  onLogOut(): void {
+    const req = this.http.post('/api/logout', this.user).subscribe(res => {
+      if (res.json().status === "OK") {
+        console.log("Logout Successful: ", res.json());
+      } else {
+        console.log("error: ", res.json());
+      }
+    }, err => {
+      console.log("Error, Could not add item", this.user, err);
+    });
   }
 }

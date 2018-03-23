@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../user';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-login-form',
@@ -12,19 +13,21 @@ export class LoginFormComponent implements OnInit {
   @ViewChild('loginForm') loginForm: NgForm;
   user: User = {};
 
-  constructor() {
+  constructor(private http: Http) {
   }
 
   ngOnInit() {
   }
 
   onLogIn(): void {
-    // this.user = {
-    //   username: "Yong Lei",
-    //   email: "will19ie95@gmail.com"
-    // };
-    // console.log("Logged In.", this.user);
-    console.log("Logged In");
-    console.log(this.loginForm.value, this.loginForm.valid);
+    const req = this.http.post('/api/login', this.user).subscribe(res => {
+      if (res.json().status === "OK") {
+        console.log("Login Successful: ", res.json());
+      } else {
+        console.log("error: ", res.json());
+      }
+    }, err => {
+      console.log("Error, Could not add item", this.user, err);
+    });
   }
 }
