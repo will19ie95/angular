@@ -11,7 +11,10 @@ import { Http } from '@angular/http';
 export class LoginFormComponent implements OnInit {
 
   @ViewChild('loginForm') loginForm: NgForm;
-  user: User = {};
+  user = {
+    email: "",
+    password: ""
+  };
 
   constructor(private http: Http) {
   }

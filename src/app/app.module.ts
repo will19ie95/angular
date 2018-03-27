@@ -19,6 +19,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { AdditemFormComponent } from './additem-form/additem-form.component';
 import { GetitemFormComponent } from './getitem-form/getitem-form.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { GetitemFormComponent } from './getitem-form/getitem-form.component';
     RouterModule,
     AppRoutingModule,
   ],
-  providers: [UserService],
+  providers: [UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

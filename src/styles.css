@@ -26,8 +26,8 @@ mat-icon {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 100%;
-  margin: 20px 5px 20px 5px;
+  width: 500px;
+  margin: 20px;
 }
 
 .center {

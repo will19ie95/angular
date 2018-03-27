@@ -4,13 +4,13 @@
     <h2>Sign Up</h2>
     <hr>
     <mat-form-field>
-      <input matInput placeholder="email" type="email" [(ngModel)]="user.email" name="email" required>
+      <input matInput placeholder="email" type="email" [(ngModel)]="addUser.email" name="email" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="username" type="text" [(ngModel)]="user.username" name="username" required>
+      <input matInput placeholder="username" type="text" [(ngModel)]="addUser.username" name="username" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="password" type="password" [(ngModel)]="user.password" name="password" required>
+      <input matInput placeholder="password" type="password" [(ngModel)]="addUser.password" name="password" required>
     </mat-form-field>
   
     <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">Sign Up</button>
@@ -21,10 +21,10 @@
     <h2>Verify</h2>
     <hr>
     <mat-form-field>
-      <input matInput placeholder="email" type="email" [(ngModel)]="user.email" name="email" required>
+      <input matInput placeholder="email" type="email" [(ngModel)]="verifyUser.email" name="email" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="key" type="text" [(ngModel)]="key" name="key" required>
+      <input matInput placeholder="key" type="text" [(ngModel)]="verifyUser.key" name="key" required>
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit" [disabled]="!verifyForm.valid">Verify</button>
   </form>
