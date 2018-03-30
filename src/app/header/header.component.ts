@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
+import { User } from '../user';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: "app-header",
@@ -6,9 +8,14 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
-  ngOnInit() {}
+  // Taken as input from parent App Module.
+  @Input() user: User;
+  @Input() isLoggedIn: Boolean;
+
+  ngOnInit() {
+  }
 
   ngOnDestroy(): void {
   }

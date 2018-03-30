@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../user';
-import { Http } from '@angular/http';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -11,26 +12,32 @@ import { Http } from '@angular/http';
 export class LoginFormComponent implements OnInit {
 
   @ViewChild('loginForm') loginForm: NgForm;
-  user = {
-    email: "",
-    password: ""
-  };
+  user: User;
 
-  constructor(private http: Http) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
+    this.user = this.authService.getUserDetails();
+    // prevent template error, fix me
+    if (!this.user) {
+      this.user = {
+        username: "",
+          email: ""
+      };
+    }
   }
 
   onLogIn(): void {
-    const req = this.http.post('/api/login', this.user).subscribe(res => {
-      if (res.json().status === "OK") {
-        console.log("Login Successful: ", res.json());
-      } else {
-        console.log("error: ", res.json());
-      }
-    }, err => {
-      console.log("Error, Could not add item", this.user, err);
+    this.authService.login(this.user).subscribe(() => {
+      // this.user = this.authService.getUserDetails();
+      console.log("Logged in as :", this.user);
+      // send it to subscribers:
+      this.authService.loginUserObs(this.user);
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+      console.error(err);
     });
   }
+
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Input, Component, OnInit} from '@angular/core';
 import { User } from '../user';
-import { Http } from '@angular/http';
 
-import { UserService } from "../user.service";
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-home',
@@ -12,51 +13,20 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomeComponent implements OnInit {
 
-  user: User = {
-    username: "",
-    email: ""
-  };
+  user: User;
 
-  constructor(private http: Http, private userService: UserService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // this.userService.logIn();
     this.getUser();
   }
 
   getUser(): void {
-    this.user = this.userService.getUser();
-    if (this.user) {
-      console.log("Welcome Back: ", this.user);
-    } else {
-      console.log("No User Logged In", " ERROR");
-    }
+    this.user = this.authService.getUserDetails();
   }
 
-  // onLogIn(): void {
-  //   this.getUser();
-  // }
-
   onLogOut(): void {
-    // const req = this.http.post('/api/logout', this.user).subscribe(res => {
-    //   if (res.json().status === "OK") {
-    //     console.log("Logout Successful: ", res.json());
-    //   } else {
-    //     console.log("error: ", res.json());
-    //   }
-    // }, err => {
-    //   console.log("Error, Could not add item", this.user, err);
-    // });
-    this.userService.logOut().subscribe(data => {
-      if (data.status === "OK") {
-        this.user = {
-          username: "",
-          email: ""
-        };
-        console.log("Logged Out", data);
-      } else {
-        console.log("FAILED to logout", data.error);
-      }
-    });
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 }

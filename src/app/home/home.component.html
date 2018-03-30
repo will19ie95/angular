@@ -1,5 +1,6 @@
-<div ng-if="user" class="form-container">
-  <h3>Welcome: {{user}}</h3>
-  <button mat-raised-button color="accent" (click)="onLogOut()">Log Out</button>
+<div *ngIf="user" class="forms-container">
+  <div class="form-container">
+    <h3>Welcome: {{user.username}}</h3>
+    <button mat-raised-button color="accent" (click)="onLogOut()">Log Out</button>
+  </div>
 </div>
-

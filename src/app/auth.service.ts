@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
 
@@ -10,7 +11,7 @@ import { User } from './user';
 export interface UserDetails {
   _id: string;
   email: string;
-  name: string;
+  username: string;
   exp: number;
   iat: number;
 }
@@ -20,23 +21,11 @@ interface TokenResponse {
   token: string;
 }
 
-// User interface
-// export interface TokenPayload {
-//   username?: string;
-//   email: string;
-//   password: string;
-// }
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.getToken()}`
-  })
-};
-
 @Injectable()
 export class AuthService {
   private token: string;
+  private userDetails: UserDetails;
+  private user = new Subject<any>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -52,18 +41,6 @@ export class AuthService {
     return this.token;
   }
 
-  public getUserDetails(): UserDetails {
-    const token = this.getToken();
-    let payload;
-    if (token) {
-      payload = token.split('.')[1];
-      payload = window.atob(payload);
-      return JSON.parse(payload);
-    } else {
-      return null;
-    }
-  }
-
   public isLoggedIn(): boolean {
     const user = this.getUserDetails();
     if (user) {
@@ -75,6 +52,12 @@ export class AuthService {
 
   private request(method: 'post' | 'get', type: 'login' | 'adduser' | 'user', user?: User): Observable<any> {
     let base;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.getToken()}`
+      })
+    };
 
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, user);
@@ -85,6 +68,7 @@ export class AuthService {
     const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
+          console.log("token data:", data.token);
           this.saveToken(data.token);
         }
         return data;
@@ -106,14 +90,31 @@ export class AuthService {
     return this.request('get', 'user');
   }
 
+  public getUserDetails(): UserDetails {
+    const token = this.getToken();
+    let payload;
+    if (token) {
+      payload = token.split('.')[1];
+      payload = window.atob(payload);
+      this.userDetails = JSON.parse(payload);
+      return this.userDetails;
+    } else {
+      return null;
+    }
+  }
+
+  public getuserObs(): Observable<any> {
+    return this.user.asObservable();
+  }
+
+  public loginUserObs(user: User) {
+    this.user.next(user);
+  }
+
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('twitter-clone-token');
+    this.loginUserObs(null);
     this.router.navigateByUrl('/');
   }
-
-
-
-
-
 }

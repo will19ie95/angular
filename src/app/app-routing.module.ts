@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule, CanActivate } from "@angular/router";
 
 import { HomeComponent } from "./home/home.component";
 import { LoginFormComponent } from "./login-form/login-form.component";
@@ -8,6 +8,7 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
 import { AdditemFormComponent } from './additem-form/additem-form.component';
 import { GetitemFormComponent } from './getitem-form/getitem-form.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { AuthGuardService } from "./auth-guard.service";
 
 
 const appRoutes: Routes = [
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
   },
   {
     path: "home",
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: "login",
@@ -30,15 +32,18 @@ const appRoutes: Routes = [
   },
   {
     path: "additem",
-    component: AdditemFormComponent
+    component: AdditemFormComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: "getitem",
-    component: GetitemFormComponent
+    component: GetitemFormComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: "search",
-    component: SearchFormComponent
+    component: SearchFormComponent,
+    canActivate: [AuthGuardService]
   }
 ];
 
