@@ -16,12 +16,11 @@ export class AppComponent implements OnInit, OnDestroy {
   };
 
   user_sub: Subscription;
-  isLoggedIn: Boolean;
 
   constructor(public authService: AuthService, private router: Router) {
-    if (!this.isLoggedIn) {
-      this.router.navigateByUrl('/login');
-    }
+    // if (!this.authService.isLoggedIn()) {
+    //   this.router.navigate(['login']);
+    // }
   }
 
   ngOnInit() {
@@ -35,8 +34,6 @@ export class AppComponent implements OnInit, OnDestroy {
   subscribeUser() {
     this.user_sub = this.authService.getuserObs().subscribe(user => {
       this.user = user;
-      this.isLoggedIn = user;
-      console.log("App User", this.user);
     }, (err) => {
       console.error(err);
     });

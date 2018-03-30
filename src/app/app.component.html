@@ -6,7 +6,7 @@
   </div>
 </mat-toolbar> -->
 
-<app-header [user]="user" [isLoggedIn]="isLoggedIn"></app-header>
+<app-header [user]="user" [isLoggedIn]="authService.isLoggedIn()"></app-header>
 
 <div class="center">
   <router-outlet></router-outlet>

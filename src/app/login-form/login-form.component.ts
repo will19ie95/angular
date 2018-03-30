@@ -30,8 +30,6 @@ export class LoginFormComponent implements OnInit {
 
   onLogIn(): void {
     this.authService.login(this.user).subscribe(() => {
-      // this.user = this.authService.getUserDetails();
-      console.log("Logged in as :", this.user);
       // send it to subscribers:
       this.authService.loginUserObs(this.user);
       this.router.navigateByUrl('/home');

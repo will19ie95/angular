@@ -26,6 +26,7 @@ export class AuthService {
   private token: string;
   private userDetails: UserDetails;
   private user = new Subject<any>();
+  
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -50,44 +51,69 @@ export class AuthService {
     }
   }
 
-  private request(method: 'post' | 'get', type: 'login' | 'adduser' | 'user', user?: User): Observable<any> {
-    let base;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.getToken()}`
-      })
-    };
+  // private request(method: 'post' | 'get', type: 'login' | 'adduser' | 'user', user?: User): Observable<any> {
+  //   let base;
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${this.getToken()}`
+  //     })
+  //   };
 
-    if (method === 'post') {
-      base = this.http.post(`/api/${type}`, user);
-    } else {
-      base = this.http.get(`/api/${type}`, httpOptions);
-    }
+  //   if (method === 'post') {
+  //     base = this.http.post(`/api/${type}`, user);
+  //   } else {
+  //     base = this.http.get(`/api/${type}`, httpOptions);
+  //   }
 
+  //   const request = base.pipe(
+  //     map((data: TokenResponse) => {
+  //       if (data.token) {
+  //         console.log("token data:", data.token);
+  //         this.saveToken(data.token);
+  //       }
+  //       console.log("DATA,", data);
+  //       return data;
+  //     })
+  //   );
+
+  //   console.log("requrest: ", request);
+  //   return request;
+  // }
+
+  public adduser(user: User): Observable<any> {
+    // return this.request('post', 'adduser', user);
+    return this.http.post('/api/adduser', user);
+  }
+
+  public login(user: User): Observable<any> {
+    // return this.request('post', 'login', user);
+    const base = this.http.post('/api/login', user);
     const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
           console.log("token data:", data.token);
           this.saveToken(data.token);
         }
+        console.log("DATA,", data);
         return data;
       })
     );
 
     return request;
-  }
 
-  public adduser(user: User): Observable<any> {
-    return this.request('post', 'adduser', user);
-  }
-
-  public login(user: User): Observable<any> {
-    return this.request('post', 'login', user);
   }
 
   public getuser(): Observable<any> {
-    return this.request('get', 'user');
+    // return this.request('get', 'user');
+    // console.log("Getting User")
+    const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.getToken()}`
+    })
+  };
+    return this.http.get('/api/user', httpOptions);
   }
 
   public getUserDetails(): UserDetails {
