@@ -5,6 +5,8 @@ import { HttpModule } from "@angular/http";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { MaterialModule } from "./material.module";
@@ -22,6 +24,7 @@ import { GetitemFormComponent } from './getitem-form/getitem-form.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { VerifyFormComponent } from './verify-form/verify-form.component';
+import { MessageService } from './message.service';
 
 @NgModule({
   declarations: [
@@ -44,8 +47,10 @@ import { VerifyFormComponent } from './verify-form/verify-form.component';
     FormsModule,
     RouterModule,
     AppRoutingModule,
+    MessagesModule,
+    MessageModule
   ],
-  providers: [UserService, AuthService, AuthGuardService],
+  providers: [UserService, AuthService, AuthGuardService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

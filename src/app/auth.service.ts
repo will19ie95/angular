@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
-
 import { User } from './user';
+import { MessageService } from './message.service';
 
 // Interfaces here
 export interface UserDetails {
@@ -16,9 +16,14 @@ export interface UserDetails {
   iat: number;
 }
 
-// jwt Token
-interface TokenResponse {
+interface LoginResponse {
   token: string;
+  user: User;
+}
+
+export interface VerifyUser {
+  email: string;
+  key: string;
 }
 
 @Injectable()
@@ -26,8 +31,9 @@ export class AuthService {
   private token: string;
   private userDetails: UserDetails;
   private user = new Subject<any>();
+  private userObserver = this.user.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private messageService: MessageService) { }
 
   private saveToken(token: string): void {
     localStorage.setItem('twitter-clone-token', token);
@@ -50,38 +56,7 @@ export class AuthService {
     }
   }
 
-  // private request(method: 'post' | 'get', type: 'login' | 'adduser' | 'user', user?: User): Observable<any> {
-  //   let base;
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${this.getToken()}`
-  //     })
-  //   };
-
-  //   if (method === 'post') {
-  //     base = this.http.post(`/api/${type}`, user);
-  //   } else {
-  //     base = this.http.get(`/api/${type}`, httpOptions);
-  //   }
-
-  //   const request = base.pipe(
-  //     map((data: TokenResponse) => {
-  //       if (data.token) {
-  //         console.log("token data:", data.token);
-  //         this.saveToken(data.token);
-  //       }
-  //       console.log("DATA,", data);
-  //       return data;
-  //     })
-  //   );
-
-  //   console.log("requrest: ", request);
-  //   return request;
-  // }
-
   public adduser(user: User): Observable<any> {
-    // return this.request('post', 'adduser', user);
     return this.http.post('/api/adduser', user);
   }
 
@@ -89,12 +64,13 @@ export class AuthService {
     // return this.request('post', 'login', user);
     const base = this.http.post('/api/login', user);
     const request = base.pipe(
-      map((data: TokenResponse) => {
+      map((data: LoginResponse) => {
         if (data.token) {
-          console.log("token data:", data.token);
           this.saveToken(data.token);
         }
-        console.log("DATA,", data);
+        if (data.user) {
+          this.loginUserObs(data.user);
+        }
         return data;
       })
     );
@@ -104,8 +80,6 @@ export class AuthService {
   }
 
   public getuser(): Observable<any> {
-    // return this.request('get', 'user');
-    // console.log("Getting User")
     const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -129,10 +103,11 @@ export class AuthService {
   }
 
   public getuserObs(): Observable<any> {
-    return this.user.asObservable();
+    return this.userObserver;
   }
 
   public loginUserObs(user: User) {
+    console.log("changing users: ", user);
     this.user.next(user);
   }
 
@@ -141,5 +116,30 @@ export class AuthService {
     window.localStorage.removeItem('twitter-clone-token');
     this.loginUserObs(null);
     this.router.navigateByUrl('/');
+  }
+
+  public verifyUser(verifyUser: VerifyUser): Observable<any> {
+
+    const base = this.http.post('/api/verify', verifyUser);
+    const request = base.pipe(
+      map((data: any) => {
+        // console.log("/api/verify ", data);
+        const message = {
+          severity: "",
+          summary: "",
+        };
+        if (data.status === "OK") {
+          message.severity = "success";
+          message.summary = "Successfully Verified √";
+          this.router.navigateByUrl("/home");
+        } else if (data.status === "error") {
+          message.severity = "error";
+          message.summary = data.error;
+        }
+        this.messageService.add(message);
+        return data;
+      }));
+
+    return request;
   }
 }

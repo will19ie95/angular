@@ -1,12 +1,7 @@
-
-<!-- <mat-toolbar class="navbar-fixed mat-elevation-z10" color="primary">
-  <h1>Twitter</h1>
-  <div class="button-row" style="margin-left: 10px;">
-    <button mat-raised-button color="primary" routerLink="/home">Home</button>
-  </div>
-</mat-toolbar> -->
-
 <app-header [user]="user" [isLoggedIn]="authService.isLoggedIn()"></app-header>
+
+<p-messages [(value)]="msgs" *ngIf="msgs"></p-messages>
+<!-- <button mat-raised-button color="warn" (click)="clearMessages()"  *ngIf="msgs">Clear Message</button> -->
 
 <div class="center">
   <router-outlet></router-outlet>

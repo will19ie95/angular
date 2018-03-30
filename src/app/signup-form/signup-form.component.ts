@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { User } from '../user';
 import { AuthService } from "../auth.service";
 import { Router } from '@angular/router';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -18,14 +19,27 @@ export class SignupFormComponent implements OnInit {
     password: ""
   };
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router, private messageService: MessageService) { }
 
   ngOnInit() {
   }
 
   onSignUp(): void {
-    this.auth.adduser(this.addUser).subscribe(() => {
-      this.router.navigateByUrl("/home");
+    this.auth.adduser(this.addUser).subscribe((data) => {
+      // display on status = "OK" and status = "error"
+      const message = {
+        severity: "",
+        summary: "",
+      };
+      if (data.status === "OK") {
+        message.severity = "success";
+        message.summary = "Verification Key Sent";
+      } else if (data.status === "error") {
+        message.severity = "error";
+        // console.log(data)
+        message.summary = data.message;
+      }
+      this.messageService.add(message);
     }, (err) => {
       console.error(err);
     });

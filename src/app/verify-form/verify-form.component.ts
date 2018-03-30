@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService, VerifyUser } from '../auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class VerifyFormComponent implements OnInit {
 
   @ViewChild('verifyForm') verifyForm: NgForm;
-  verifyUser = {
-    username: "",
+  verifyUser: VerifyUser = {
+    email: "",
     key: ""
   };
 
@@ -22,6 +22,11 @@ export class VerifyFormComponent implements OnInit {
   }
 
   onVerify(): void {
+    this.auth.verifyUser(this.verifyUser).subscribe(data => {
+      // this.router.navigateByUrl("/home");
+    }, (err) => {
+      console.error(err);
+    });
   }
 
 }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { User } from '../user';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { MessageService, Message } from '../message.service';
 
 @Component({
   selector: 'app-login-form',
@@ -14,7 +15,10 @@ export class LoginFormComponent implements OnInit {
   @ViewChild('loginForm') loginForm: NgForm;
   user: User;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {
+    if (this.authService.isLoggedIn) {
+      router.navigateByUrl("/home");
+    }
   }
 
   ngOnInit() {
@@ -29,10 +33,21 @@ export class LoginFormComponent implements OnInit {
   }
 
   onLogIn(): void {
-    this.authService.login(this.user).subscribe(() => {
-      // send it to subscribers:
-      this.authService.loginUserObs(this.user);
-      this.router.navigateByUrl('/home');
+    this.authService.login(this.user).subscribe(data => {
+      // display on status = "OK" and status = "error"
+      const message = {
+        severity: "",
+        summary: "",
+      };
+      if (data.status === "OK") {
+        message.severity = "success";
+        message.summary = "Welcome " + data.user.username;
+        this.router.navigateByUrl("/home");
+      } else if (data.status === "error") {
+        message.severity = "error";
+        message.summary = data.error.message;
+      }
+      this.messageService.add(message);
     }, (err) => {
       console.error(err);
     });
