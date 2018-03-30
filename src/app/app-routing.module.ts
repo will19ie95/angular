@@ -9,6 +9,7 @@ import { AdditemFormComponent } from './additem-form/additem-form.component';
 import { GetitemFormComponent } from './getitem-form/getitem-form.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { AuthGuardService } from "./auth-guard.service";
+import { VerifyFormComponent } from "./verify-form/verify-form.component";
 
 
 const appRoutes: Routes = [
@@ -29,6 +30,10 @@ const appRoutes: Routes = [
   {
     path: "signup",
     component: SignupFormComponent
+  },
+  {
+    path: "verify",
+    component: VerifyFormComponent
   },
   {
     path: "additem",

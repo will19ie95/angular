@@ -12,15 +12,10 @@ import { Router } from '@angular/router';
 export class SignupFormComponent implements OnInit {
 
   @ViewChild('signupForm') signupForm: NgForm;
-  @ViewChild('verifyForm') verifyForm: NgForm;
   addUser: User = {
     username : "",
     email: "",
     password: ""
-  };
-  verifyUser = {
-    username: "",
-    key: ""
   };
 
   constructor(private auth: AuthService, private router: Router) { }
@@ -34,23 +29,6 @@ export class SignupFormComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
-  }
-
-  onVerify(): void {
-
-    // const data = {
-    //   email: this.verifyForm.value.email,
-    //   key: this.verifyForm.value.key
-    // };
-
-    // const req = this.http.post('/api/verify', this.verifyUser).subscribe(res => {
-    //   res.json();
-    //   console.log(res.json());
-    // }, err => {
-    //   console.log("Error, Could not Verify user", this.verifyUser, err);
-    // });
-    // console.log("Signed Up");
-    // console.log(this.signupForm.value, this.signupForm.valid);
   }
 
 }

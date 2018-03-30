@@ -1,0 +1,12 @@
+<!-- verify form -->
+<form #verifyForm="ngForm" (ngSubmit)="onVerify(verifyForm)" class="form-container">
+  <h2>Verify</h2>
+  <hr>
+  <mat-form-field>
+    <input matInput placeholder="email" type="email" [(ngModel)]="verifyUser.email" name="email" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="key" type="text" [(ngModel)]="verifyUser.key" name="key" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!verifyForm.valid">Verify</button>
+</form>

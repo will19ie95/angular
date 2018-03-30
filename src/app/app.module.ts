@@ -21,6 +21,7 @@ import { AdditemFormComponent } from './additem-form/additem-form.component';
 import { GetitemFormComponent } from './getitem-form/getitem-form.component';
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
+import { VerifyFormComponent } from './verify-form/verify-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthGuardService } from './auth-guard.service';
     SearchFormComponent,
     AdditemFormComponent,
     GetitemFormComponent,
+    VerifyFormComponent,
   ],
   imports: [
     BrowserModule,

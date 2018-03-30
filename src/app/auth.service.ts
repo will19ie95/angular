@@ -26,7 +26,6 @@ export class AuthService {
   private token: string;
   private userDetails: UserDetails;
   private user = new Subject<any>();
-  
 
   constructor(private http: HttpClient, private router: Router) { }
 
