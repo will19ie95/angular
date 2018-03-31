@@ -1,8 +1,37 @@
-<!-- getitem form -->
-<form #getitemForm="ngForm" (ngSubmit)="onGetItem()" class="form-container">
-  <h2>Get Item</h2>
-  <mat-form-field>
-    <input matInput placeholder="Item ID" type="text" [(ngModel)]="getItemId" name="id" required>
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!getitemForm.valid">Get Item</button>
-</form>
+<div class="forms-container">
+  <!-- getitem form -->
+  <form #getitemForm="ngForm" (ngSubmit)="onGetItem()" class="form-container">
+    <h2>Get Item</h2>
+    <mat-form-field>
+      <input matInput placeholder="Item ID" type="text" [(ngModel)]="getItemId" name="id" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!getitemForm.valid">Get Item</button>
+  </form>
+
+  <!-- item display -->
+  <div class="form-container" *ngIf="item.username">
+    <mat-card class="tweet-card">
+
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ item.username | uppercase }}</mat-card-title>
+        <mat-card-subtitle>{{ item.timestamp | date:'full' }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      
+      <mat-card-content>
+        <p> {{item.content}} </p>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+    <hr>
+    <button mat-raised-button color="accent" (click)="onClearItem()">Clear</button>
+    
+  </div>
+
+</div>

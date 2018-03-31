@@ -8,6 +8,13 @@
 @import "../node_modules/primeng/resources/themes/omega/theme.css";
 @import "../node_modules/primeng/resources/primeng.css";
 
+/* change to vertical */
+@media all and (max-width: 700px) {
+  .forms-container {
+    flex-direction: column !important;
+  }
+}
+
 body {
   margin: 0;
   font-family: sans-serif;
@@ -17,6 +24,7 @@ mat-icon {
   font-family: "Material Icons" !important;
 }
 
+/* defaults to horizontal */
 .forms-container {
   display: flex;
   justify-content: center;
@@ -29,7 +37,7 @@ mat-icon {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 300px;
+  min-width: 360px;
   margin: 20px;
 }
 

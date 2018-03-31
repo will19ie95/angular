@@ -27,8 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(public authService: AuthService, private router: Router, private messageService: MessageService) {
     // redirect to home if logged in
-    if (authService.isLoggedIn) {
-      this.router.navigateByUrl('/home');
+    if (!authService.isLoggedIn()) {
+      this.router.navigateByUrl('/login');
     }
   }
 
