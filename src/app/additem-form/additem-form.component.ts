@@ -4,7 +4,6 @@ import { User } from '../user';
 import { Item } from '../item';
 import { AuthService } from '../auth.service';
 import { ItemService } from '../item.service';
-import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-additem-form',
@@ -19,7 +18,7 @@ export class AdditemFormComponent implements OnInit {
     content: ""
   };
 
-  constructor(private auth: AuthService, private itemService: ItemService, private messageService: MessageService) { }
+  constructor(private auth: AuthService, private itemService: ItemService) { }
 
   ngOnInit() {
   }
@@ -27,18 +26,6 @@ export class AdditemFormComponent implements OnInit {
   onAddItem(): void {
     this.itemService.addItem(this.addItem).subscribe(data => {
       console.log("add item data ", data);
-      const message = {
-        severity: "",
-        summary: "",
-      };
-      if (data.status === "OK") {
-        message.severity = "success";
-        message.summary = data.message;
-      } else if (data.status === "error") {
-        message.severity = "error";
-        message.summary = data.message;
-      }
-      this.messageService.add(message);
       // reset form
       this.additemForm.reset();
       this.additemForm.resetForm();

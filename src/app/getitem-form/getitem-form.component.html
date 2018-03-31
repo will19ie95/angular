@@ -1,9 +1,8 @@
 <!-- getitem form -->
-<form class="form-container">
+<form #getitemForm="ngForm" (ngSubmit)="onGetItem()" class="form-container">
   <h2>Get Item</h2>
-  <hr>
   <mat-form-field>
-    <input matInput placeholder="item ID">
+    <input matInput placeholder="Item ID" type="text" [(ngModel)]="getItemId" name="id" required>
   </mat-form-field>
-  <button mat-raised-button color="primary">Get Item</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!getitemForm.valid">Get Item</button>
 </form>
