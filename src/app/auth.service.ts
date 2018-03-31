@@ -35,6 +35,7 @@ export class AuthService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.getToken()}`
     })
