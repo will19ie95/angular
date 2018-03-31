@@ -87,9 +87,10 @@ export class AuthService {
 
   }
 
-  public getuser(): Observable<any> {
-    return this.http.get('/api/user', this.httpOptions);
-  }
+  // not implemented
+  // public getuser(): Observable<any> {
+  //   return this.http.get('/api/user', this.httpOptions);
+  // }
 
   public getUserDetails(): UserDetails {
     const token = this.getToken();
@@ -104,7 +105,7 @@ export class AuthService {
     }
   }
 
-  public getuserObs(): Observable<any> {
+  public getuserObserver(): Observable<any> {
     return this.userObserver;
   }
 
