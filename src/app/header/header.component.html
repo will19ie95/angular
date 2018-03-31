@@ -1,11 +1,12 @@
 <mat-toolbar class="navbar-fixed mat-elevation-z10" color="primary">
-	<button mat-raised-button color="accent" routerLink="/">Twitter</button>
-	<div class="button-row" style="margin-left: 10px;">
+	<div class="button-row">
+		<button mat-raised-button color="accent" routerLink="/">Twitter</button>
+		
 		<button mat-raised-button color="primary" routerLink="/login" *ngIf="!auth.isLoggedIn()">Log In</button>
 		<button mat-raised-button color="primary" routerLink="/signup" *ngIf="!auth.isLoggedIn()">Sign Up</button>
 		<button mat-raised-button color="primary" routerLink="/verify" *ngIf="!auth.isLoggedIn()">Verify</button>
 
-		<button mat-raised-button color="primary" routerLink="/home" *ngIf="auth.isLoggedIn()">Home</button>
+		<!-- <button mat-raised-button color="primary" routerLink="/home" *ngIf="auth.isLoggedIn()">Home</button> -->
 		<button mat-raised-button color="primary" routerLink="/additem" *ngIf="auth.isLoggedIn()">Add Item</button>
 		<button mat-raised-button color="primary" routerLink="/getitem" *ngIf="auth.isLoggedIn()">Get Item</button>
 		<button mat-raised-button color="primary" routerLink="/search" *ngIf="auth.isLoggedIn()">Search</button>
