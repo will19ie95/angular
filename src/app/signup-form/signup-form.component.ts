@@ -13,7 +13,7 @@ import { MessageService } from '../message.service';
 export class SignupFormComponent implements OnInit {
 
   @ViewChild('signupForm') signupForm: NgForm;
-  addUser: User = {
+  public addUser: User = {
     username : "",
     email: "",
     password: ""
@@ -39,6 +39,8 @@ export class SignupFormComponent implements OnInit {
         message.summary = data.message;
       }
       this.messageService.add(message);
+      this.signupForm.reset();
+      this.signupForm.resetForm();
     }, (err) => {
       console.error(err);
     });

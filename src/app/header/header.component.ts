@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  constructor(private auth: AuthService) {}
+  constructor(public auth: AuthService) {}
 
   // Taken as input from parent App Module.
   @Input() user: User;

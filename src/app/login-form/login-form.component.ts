@@ -13,7 +13,11 @@ import { MessageService, Message } from '../message.service';
 export class LoginFormComponent implements OnInit {
 
   @ViewChild('loginForm') loginForm: NgForm;
-  user: User;
+  user: User = {
+    username: "",
+    email: "",
+    password: ""
+  };
 
   constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {
     if (this.authService.isLoggedIn) {

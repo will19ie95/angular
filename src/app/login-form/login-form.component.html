@@ -1,13 +1,13 @@
 <!-- Form 2 -->
-<form #loginForm="ngForm" (ngSubmit)="onLogIn(loginForm)" class="form-container">
+<form #loginForm="ngForm" (ngSubmit)="onLogIn()" class="form-container">
   <h2>Log In</h2>
   <hr>
   <mat-form-field>
-    <input matInput placeholder="email" type="text" [(ngModel)]="user.email" name="email" required pattern="[^ @]*@[^ @]*">
+    <input matInput placeholder="email" type="text" [(ngModel)]="user['email']" name="email" required pattern="[^ @]*@[^ @]*">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="password" type="password" [(ngModel)]="user.password" name="password" required>
+    <input matInput placeholder="password" type="password" [(ngModel)]="user['password']" name="password" required>
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Log In</button>
