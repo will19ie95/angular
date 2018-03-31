@@ -32,6 +32,13 @@ export class AuthService {
   private userDetails: UserDetails;
   private user = new Subject<any>();
   private userObserver = this.user.asObservable();
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.getToken()}`
+    })
+  };
 
   constructor(private http: HttpClient, private router: Router, private messageService: MessageService) { }
 
@@ -62,7 +69,7 @@ export class AuthService {
 
   public login(user: User): Observable<any> {
     // return this.request('post', 'login', user);
-    const base = this.http.post('/api/login', user);
+    const base = this.http.post('/api/login', user, this.httpOptions);
     const request = base.pipe(
       map((data: LoginResponse) => {
         if (data.token) {
@@ -80,13 +87,7 @@ export class AuthService {
   }
 
   public getuser(): Observable<any> {
-    const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.getToken()}`
-    })
-  };
-    return this.http.get('/api/user', httpOptions);
+    return this.http.get('/api/user', this.httpOptions);
   }
 
   public getUserDetails(): UserDetails {
@@ -120,7 +121,7 @@ export class AuthService {
 
   public verifyUser(verifyUser: VerifyUser): Observable<any> {
 
-    const base = this.http.post('/api/verify', verifyUser);
+    const base = this.http.post('/api/verify', verifyUser, this.httpOptions);
     const request = base.pipe(
       map((data: any) => {
         // console.log("/api/verify ", data);
