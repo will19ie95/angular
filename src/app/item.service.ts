@@ -45,6 +45,7 @@ export class ItemService {
       this.messageService.add(message);
 
       return data;
+
     }));
 
     return request;
@@ -59,8 +60,23 @@ export class ItemService {
     };
 
     const base = this.http.get('/api/item?id=' + itemId, httpOptions);
-    const request = base.pipe(map((data) => {
+    const request = base.pipe(map((data: any) => {
       // console.log("Get Item Data", data);
+
+      const message = {
+        severity: "",
+        summary: "",
+      };
+
+      if (data.status === "OK") {
+        message.severity = "success";
+        message.summary = data.message;
+      } else if (data.status === "error") {
+        message.severity = "error";
+        message.summary = data.message;
+      }
+      this.messageService.add(message);
+
       return data;
     }));
 

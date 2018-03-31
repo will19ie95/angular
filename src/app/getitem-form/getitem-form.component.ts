@@ -32,13 +32,16 @@ export class GetitemFormComponent implements OnInit {
   onGetItem(): void {
     this.itemService.getItem(this.getItemId).subscribe(data => {
 
-      this.item.username = data.item.username;
-      this.item.content = data.item.content;
-      this.item.timestamp = data.item.timestamp;
+      if (data.status === "OK") {
+        this.item.username = data.item.username;
+        this.item.content = data.item.content;
+        this.item.timestamp = data.item.timestamp;
+      }
 
       // reset form
       this.getitemForm.reset();
       this.getitemForm.resetForm();
+
     }, err => {
       console.error(err);
     });
