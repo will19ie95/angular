@@ -1,4 +1,4 @@
 export class Item {
-  constructor(content: string, type: string) { }
+  constructor(username: string, content: string, type?: string) { }
   // password: string;
 }

@@ -25,6 +25,7 @@ import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { VerifyFormComponent } from './verify-form/verify-form.component';
 import { MessageService } from './message.service';
+import { ItemService } from './item.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { MessageService } from './message.service';
     SearchFormComponent,
     AdditemFormComponent,
     GetitemFormComponent,
-    VerifyFormComponent,
+    VerifyFormComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +51,7 @@ import { MessageService } from './message.service';
     MessagesModule,
     MessageModule
   ],
-  providers: [UserService, AuthService, AuthGuardService, MessageService],
+  providers: [UserService, AuthService, AuthGuardService, MessageService, ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

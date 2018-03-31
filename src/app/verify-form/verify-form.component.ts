@@ -23,7 +23,7 @@ export class VerifyFormComponent implements OnInit {
 
   onVerify(): void {
     this.auth.verifyUser(this.verifyUser).subscribe(data => {
-      // this.router.navigateByUrl("/home");
+      this.router.navigateByUrl("/home");
     }, (err) => {
       console.error(err);
     });

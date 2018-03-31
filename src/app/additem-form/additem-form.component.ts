@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 import { User } from '../user';
-import { Http } from '@angular/http';
+import { Item } from '../item';
+import { AuthService } from '../auth.service';
+import { ItemService } from '../item.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-additem-form',
@@ -11,21 +14,36 @@ import { Http } from '@angular/http';
 export class AdditemFormComponent implements OnInit {
 
   @ViewChild('additemForm') additemForm: NgForm;
-  item = {};
-  // item: User = {};
+  addItem: Item = {
+    username: this.auth.getUserDetails().username,
+    content: ""
+  };
 
-  constructor(private http: Http) { }
+  constructor(private auth: AuthService, private itemService: ItemService, private messageService: MessageService) { }
 
   ngOnInit() {
   }
 
   onAddItem(): void {
-    const req = this.http.post('/api/additem', this.item).subscribe(res => {
-      res.json();
-      console.log(res.json());
+    this.itemService.addItem(this.addItem).subscribe(data => {
+      console.log("add item data ", data);
+      const message = {
+        severity: "",
+        summary: "",
+      };
+      if (data.status === "OK") {
+        message.severity = "success";
+        message.summary = data.message;
+      } else if (data.status === "error") {
+        message.severity = "error";
+        message.summary = data.message;
+      }
+      this.messageService.add(message);
+      // reset form
+      this.additemForm.reset();
+      this.additemForm.resetForm();
     }, err => {
-      console.log("Error, Could not add item", this.item, err);
+      console.error(err);
     });
   }
-
 }

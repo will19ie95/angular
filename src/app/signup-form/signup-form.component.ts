@@ -36,7 +36,6 @@ export class SignupFormComponent implements OnInit {
         message.summary = "Verification Key Sent";
       } else if (data.status === "error") {
         message.severity = "error";
-        // console.log(data)
         message.summary = data.message;
       }
       this.messageService.add(message);

@@ -3,7 +3,7 @@
   <h2>Sign Up</h2>
   <hr>
   <mat-form-field>
-    <input matInput placeholder="email" type="email" [(ngModel)]="addUser.email" name="email" required>
+    <input matInput placeholder="email" type="email" [(ngModel)]="addUser.email" name="email" required pattern="[^ @]*@[^ @]*">
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="username" type="text" [(ngModel)]="addUser.username" name="username" required>
