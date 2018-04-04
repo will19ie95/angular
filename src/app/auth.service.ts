@@ -72,12 +72,13 @@ export class AuthService {
     // return this.request('post', 'login', user);
     const base = this.http.post('/api/login', user, this.httpOptions);
     const request = base.pipe(
-      map((data: LoginResponse) => {
-        if (data.token) {
+      map((data: any) => {
+        if (data.status === "OK") {
           this.saveToken(data.token);
-        }
-        if (data.user) {
           this.loginUserObs(data.user);
+          this.router.navigateByUrl("/home");
+        } else {
+          this.messageService.broadcast(data);
         }
         return data;
       })
@@ -126,20 +127,10 @@ export class AuthService {
     const base = this.http.post('/api/verify', verifyUser, this.httpOptions);
     const request = base.pipe(
       map((data: any) => {
-        // console.log("/api/verify ", data);
-        const message = {
-          severity: "",
-          summary: "",
-        };
+        this.messageService.broadcast(data);
         if (data.status === "OK") {
-          message.severity = "success";
-          message.summary = "Successfully Verified √";
           this.router.navigateByUrl("/home");
-        } else if (data.status === "error") {
-          message.severity = "error";
-          message.summary = data.error;
         }
-        this.messageService.add(message);
         return data;
       }));
 

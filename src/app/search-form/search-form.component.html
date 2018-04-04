@@ -1,12 +1,20 @@
 <!-- search Form -->
-<form class="form-container">
+<form #searchItemsForm="ngForm" (ngSubmit)="onSearchItems()" class="form-container">
   <h2>Search</h2>
-  <hr>
   <mat-form-field>
-    <input matInput placeholder="time Stamp">
+    <input matInput placeholder="Timestamp" [(ngModel)]="searchQuery.timestamp" name="timestamp">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="limit">
+    <input matInput placeholder="Limit" [(ngModel)]="searchQuery.limit" name="limit">
   </mat-form-field>
-  <button mat-raised-button color="primary">Search</button>
+  <mat-form-field>
+    <input matInput placeholder="Query" [(ngModel)]="searchQuery.query" name="query">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Username" [(ngModel)]="searchQuery.username" name="username">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Following" disabled>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Search</button>
 </form>

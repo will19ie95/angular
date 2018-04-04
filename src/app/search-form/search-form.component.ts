@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ItemService } from '../item.service';
 
 @Component({
   selector: 'app-search-form',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchFormComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('searchItemsForm') searchItemsForm: NgForm;
+  searchQuery = {
+    timestamp: "",
+    limit: "",
+    query: "",
+    username: "",
+    following: true
+  };
+  constructor(private itemService: ItemService) { }
+
+
 
   ngOnInit() {
+  }
+
+  onSearchItems(): void {
+    console.log("Search Query: ", this.searchQuery);
   }
 
 }

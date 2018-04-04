@@ -1,6 +1,6 @@
 <app-header [user]="user" [isLoggedIn]="authService.isLoggedIn()"></app-header>
 
-<p-messages [(value)]="msgs" *ngIf="msgs"></p-messages>
+<p-messages [(value)]="msgs" *ngIf="msgs" (click)="clearMessages()"></p-messages>
 <!-- <button mat-raised-button color="warn" (click)="clearMessages()"  *ngIf="msgs">Clear Message</button> -->
 
 <div class="center">

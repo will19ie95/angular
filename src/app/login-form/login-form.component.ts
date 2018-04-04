@@ -37,22 +37,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   onLogIn(): void {
-    this.authService.login(this.user).subscribe(data => {
-      // display on status = "OK" and status = "error"
-      const message = {
-        severity: "",
-        summary: "",
-      };
-      if (data.status === "OK") {
-        message.severity = "success";
-        message.summary = "Welcome " + data.user.username;
-        this.router.navigateByUrl("/home");
-      } else if (data.status === "error") {
-        message.severity = "error";
-        message.summary = data.error.message;
-      }
-      this.messageService.add(message);
-    }, (err) => {
+    this.authService.login(this.user).subscribe(data => {}, (err) => {
       console.error(err);
     });
   }

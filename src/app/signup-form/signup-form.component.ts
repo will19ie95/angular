@@ -26,19 +26,7 @@ export class SignupFormComponent implements OnInit {
 
   onSignUp(): void {
     this.auth.adduser(this.addUser).subscribe((data) => {
-      // display on status = "OK" and status = "error"
-      const message = {
-        severity: "",
-        summary: "",
-      };
-      if (data.status === "OK") {
-        message.severity = "success";
-        message.summary = "Verification Key Sent";
-      } else if (data.status === "error") {
-        message.severity = "error";
-        message.summary = data.message;
-      }
-      this.messageService.add(message);
+      this.messageService.broadcast(data);
       this.signupForm.reset();
       this.signupForm.resetForm();
     }, (err) => {
