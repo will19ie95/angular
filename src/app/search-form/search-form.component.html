@@ -1,20 +1,55 @@
-<!-- search Form -->
-<form #searchItemsForm="ngForm" (ngSubmit)="onSearchItems()" class="form-container">
-  <h2>Search</h2>
-  <mat-form-field>
-    <input matInput placeholder="Timestamp" [(ngModel)]="searchQuery.timestamp" name="timestamp">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Limit" [(ngModel)]="searchQuery.limit" name="limit">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Query" [(ngModel)]="searchQuery.query" name="query">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Username" [(ngModel)]="searchQuery.username" name="username">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Following" disabled>
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Search</button>
-</form>
+<div class="forms-container">
+  <!-- search Form -->
+  <form #searchItemsForm="ngForm" (ngSubmit)="onSearchItems()" class="form-container">
+    <h2>Search</h2>
+    <mat-form-field>
+      <input matInput placeholder="Timestamp" [(ngModel)]="searchQuery.timestamp" name="timestamp">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Limit" [(ngModel)]="searchQuery.limit" name="limit">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Query" [(ngModel)]="searchQuery.q" name="query">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Username" [(ngModel)]="searchQuery.username" name="username">
+    </mat-form-field>
+    <!-- <mat-form-field>
+      <input matInput placeholder="Following" disabled>
+    </mat-form-field> -->
+    <div style="text-align: left; margin-bottom: 15px;">
+      <mat-checkbox [(ngModel)]="searchQuery.following" name="following">Only Interested In People Im Following</mat-checkbox>
+    </div>
+    
+    <button mat-raised-button color="primary" type="submit">Search</button>
+  </form>
+
+
+
+  
+  <!-- items display -->
+  <div class="form-container" *ngIf="items[0]" >
+    <mat-card class="tweet-card" *ngFor="let item of items; let i = index">
+  
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ item.username | uppercase }}</mat-card-title>
+        <mat-card-subtitle>{{ item.timestamp | date }}</mat-card-subtitle>
+      </mat-card-header>
+  
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+  
+      <mat-card-content>
+        <p> {{item.content}} </p>
+      </mat-card-content>
+  
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <button mat-raised-button color="accent" (click)="onClearItems()">Clear</button>
+  </div>
+
+</div>

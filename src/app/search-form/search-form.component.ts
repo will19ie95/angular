@@ -13,10 +13,11 @@ export class SearchFormComponent implements OnInit {
   searchQuery = {
     timestamp: "",
     limit: "",
-    query: "",
+    q: "",
     username: "",
-    following: true
+    following: false
   };
+  items = [];
   constructor(private itemService: ItemService) { }
 
 
@@ -26,6 +27,26 @@ export class SearchFormComponent implements OnInit {
 
   onSearchItems(): void {
     console.log("Search Query: ", this.searchQuery);
+
+    this.itemService.searchItems(this.searchQuery).subscribe((data) => {
+      this.items = data.items;
+      this.searchItemsForm.reset();
+      this.searchItemsForm.resetForm();
+      this.searchQuery = {
+        timestamp: "",
+        limit: "",
+        q: "",
+        username: "",
+        following: false
+      };
+    }, (err) => {
+      console.error(err);
+    });
+
+  }
+
+  onClearItems(): void {
+    this.items = [];
   }
 
 }

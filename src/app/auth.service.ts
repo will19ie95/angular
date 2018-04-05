@@ -111,7 +111,7 @@ export class AuthService {
   }
 
   public loginUserObs(user: User) {
-    console.log("changing users: ", user);
+    // console.log("changing users: ", user);
     this.user.next(user);
   }
 

@@ -33,6 +33,8 @@ import { UserService } from "./user.service";
 import { AuthGuardService } from './auth-guard.service';
 import { MessageService } from './message.service';
 import { ItemService } from './item.service';
+import { TweetsComponent } from './tweets/tweets.component';
+import { TweetComponent } from './tweet/tweet.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ItemService } from './item.service';
     SearchFormComponent,
     AdditemFormComponent,
     GetitemFormComponent,
-    VerifyFormComponent
+    VerifyFormComponent,
+    TweetsComponent,
+    TweetComponent
   ],
   imports: [
     BrowserModule,

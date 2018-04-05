@@ -7,7 +7,8 @@ import {
   MatListModule,
   MatCardModule,
   MatSelectModule,
-  MatInputModule
+  MatInputModule,
+  MatCheckboxModule
 } from "@angular/material";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -24,7 +25,8 @@ import { LayoutModule } from "@angular/cdk/layout";
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule
   ],
   exports: [
     LayoutModule,
@@ -36,7 +38,8 @@ import { LayoutModule } from "@angular/cdk/layout";
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule {}

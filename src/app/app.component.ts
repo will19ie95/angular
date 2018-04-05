@@ -45,7 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
   subscribeUser() {
     this.user_sub = this.authService.getuserObserver().subscribe(user => {
       this.user = user;
-      console.log("User change detected:", user);
     }, (err) => {
       console.error(err);
     });

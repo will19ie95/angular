@@ -19,15 +19,17 @@ export class ItemService {
 
   constructor(private http: HttpClient, private messageService: MessageService, private auth: AuthService) { }
 
-  public addItem(item: Item): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.auth.getToken()}`
-      })
-    };
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.auth.getToken()}`
+    })
+  };
 
-    const base = this.http.post('/api/additem', item, httpOptions);
+
+  public addItem(item: Item): Observable<any> {
+
+    const base = this.http.post('/api/additem', item, this.httpOptions);
     const request = base.pipe(map((data: any) => {
       this.messageService.broadcast(data);
       return data;
@@ -37,15 +39,21 @@ export class ItemService {
   }
 
   public getItem(itemId: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.auth.getToken()}`
-      })
-    };
 
-    const base = this.http.get('/api/item?id=' + itemId, httpOptions);
+    const base = this.http.get('/api/item?id=' + itemId, this.httpOptions);
     const request = base.pipe(map((data: any) => {
+      this.messageService.broadcast(data);
+      return data;
+    }));
+
+    return request;
+  }
+
+  public searchItems(query: any): Observable<any> {
+
+    const base = this.http.post('/api/search', query, this.httpOptions);
+    const request = base.pipe(map((data: any) => {
+      console.log("search item data: ", data);
       this.messageService.broadcast(data);
       return data;
     }));
