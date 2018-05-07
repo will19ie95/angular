@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy, Input } from '@angular/core';
-import { User } from '../user';
-import { AuthService } from '../auth.service';
+import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: "app-header",

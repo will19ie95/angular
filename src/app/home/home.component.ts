@@ -1,8 +1,8 @@
 import { Input, Component, OnInit} from '@angular/core';
-import { User } from '../user';
+import { User } from '../models/user.model';
 
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ItemService, Item } from '../item.service';
+import { ItemService, Item } from '../../services/item.service';
 
 @Component({
   selector: 'app-getitem-form',

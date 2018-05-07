@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
-import { User } from './user';
+import { User } from '../models/user.model';
 import { MessageService } from './message.service';
 
 // Interfaces here

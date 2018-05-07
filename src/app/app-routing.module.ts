@@ -3,13 +3,15 @@ import { CommonModule } from "@angular/common";
 import { Routes, RouterModule, CanActivate } from "@angular/router";
 
 import { HomeComponent } from "./home/home.component";
-import { LoginFormComponent } from "./login-form/login-form.component";
-import { SignupFormComponent } from './signup-form/signup-form.component';
-import { AdditemFormComponent } from './additem-form/additem-form.component';
-import { GetitemFormComponent } from './getitem-form/getitem-form.component';
-import { SearchFormComponent } from './search-form/search-form.component';
-import { AuthGuardService } from "./auth-guard.service";
-import { VerifyFormComponent } from "./verify-form/verify-form.component";
+import { AuthGuardService } from "./services/auth-guard.service";
+
+// Forms Component
+import { LoginFormComponent } from "./forms/login-form/login-form.component";
+import { SignupFormComponent } from './forms/signup-form/signup-form.component';
+import { AdditemFormComponent } from './forms/additem-form/additem-form.component';
+import { GetitemFormComponent } from './forms/getitem-form/getitem-form.component';
+import { SearchFormComponent } from './forms/search-form/search-form.component';
+import { VerifyFormComponent } from "./forms/verify-form/verify-form.component";
 
 
 const appRoutes: Routes = [

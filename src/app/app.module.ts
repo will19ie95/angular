@@ -21,18 +21,20 @@ import { MaterialModule } from "./material.module";
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { SearchFormComponent } from './search-form/search-form.component';
-import { AdditemFormComponent } from './additem-form/additem-form.component';
-import { GetitemFormComponent } from './getitem-form/getitem-form.component';
-import { VerifyFormComponent } from './verify-form/verify-form.component';
 
-import { AuthService } from './auth.service';
-import { UserService } from "./user.service";
-import { AuthGuardService } from './auth-guard.service';
-import { MessageService } from './message.service';
-import { ItemService } from './item.service';
+// Forms Component
+import { SignupFormComponent } from './forms/signup-form/signup-form.component';
+import { LoginFormComponent } from './forms/login-form/login-form.component';
+import { SearchFormComponent } from './forms/search-form/search-form.component';
+import { AdditemFormComponent } from './forms/additem-form/additem-form.component';
+import { GetitemFormComponent } from './forms/getitem-form/getitem-form.component';
+import { VerifyFormComponent } from './forms/verify-form/verify-form.component';
+
+import { AuthService } from './services/auth.service';
+import { UserService } from "./services/user.service";
+import { AuthGuardService } from './services/auth-guard.service';
+import { MessageService } from './services/message.service';
+import { ItemService } from './services/item.service';
 import { TweetsComponent } from './tweets/tweets.component';
 import { TweetComponent } from './tweet/tweet.component';
 

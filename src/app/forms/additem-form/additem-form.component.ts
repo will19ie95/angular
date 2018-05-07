@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
-import { User } from '../user';
+import { User } from '../../models/user.model';
 // import { Item } from '../item';
-import { AuthService } from '../auth.service';
-import { ItemService, Item } from '../item.service';
+import { AuthService } from '../../services/auth.service';
+import { ItemService, Item } from '../../services/item.service';
 
 @Component({
   selector: 'app-additem-form',
