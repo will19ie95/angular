@@ -48,13 +48,6 @@ export class AuthService {
     this.token = token;
   }
 
-  public getToken(): string {
-    if (!this.token) {
-      this.token = localStorage.getItem('twitter-clone-token');
-    }
-    return this.token;
-  }
-
   public isLoggedIn(): boolean {
     const user = this.getUserDetails();
     if (user) {
@@ -83,24 +76,28 @@ export class AuthService {
         return data;
       })
     );
-
     return request;
-
   }
 
-  // not implemented
-  // public getuser(): Observable<any> {
-  //   return this.http.get('/api/user', this.httpOptions);
-  // }
+  public getToken(): string {
+    if (!this.token) {
+      this.token = localStorage.getItem('twitter-clone-token');
+      if (this.token === "undefined") {
+        this.token = null;
+      }
+    }
+    return this.token;
+  }
 
   public getUserDetails(): UserDetails {
     const token = this.getToken();
-    let payload;
     if (token) {
+      let payload;
       payload = token.split('.')[1];
       payload = window.atob(payload);
       this.userDetails = JSON.parse(payload);
       return this.userDetails;
+      // return null;
     } else {
       return null;
     }
